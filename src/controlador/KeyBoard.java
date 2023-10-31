@@ -7,13 +7,14 @@ public class KeyBoard implements KeyListener {
     
     private boolean[] keys = new boolean[256];
 
-    public static boolean UP, DOWN, LEFT, RIGHT;
+    public static boolean UP, DOWN, LEFT, RIGHT,SAVE,UNDU,REDU;
 
     public KeyBoard(){
         UP = false;
         DOWN = false;
         LEFT = false;
         RIGHT = false;
+        SAVE = false;
     }
 
     public void update(){
@@ -21,11 +22,16 @@ public class KeyBoard implements KeyListener {
         DOWN = keys[KeyEvent.VK_DOWN];
         LEFT = keys[KeyEvent.VK_LEFT];
         RIGHT = keys[KeyEvent.VK_RIGHT];
+        SAVE = keys[83]; // TECLA S
+        UNDU = keys[70]; // TECLA F
+        REDU = keys[72]; // TECLA H
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
+        //System.out.println(e.getKeyCode());
     }
 
     @Override
@@ -35,6 +41,5 @@ public class KeyBoard implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
     }
 }

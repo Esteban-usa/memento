@@ -6,8 +6,8 @@ public class GameState {
 
     private Player player;
 
-    public void GameState(){
-        player = new Player(Buffered.imageLoader("D:\\Universidad\\semestre 6\\Patrones\\memento\\memento\\src\\img\\cubo.png"),20,20,5,5);
+    public GameState(){
+        player = new Player(Buffered.imageLoader("D:\\Programacion\\universidad\\semestre 6\\patrones\\Memento\\src\\img\\cubo.png"),20,450,5);
     }  
     
     public void update(){

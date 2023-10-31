@@ -9,25 +9,25 @@ import java.awt.image.BufferStrategy;
 
 import controlador.Controlador;
 
-public class Vista extends JFrame implements Runnable{
-    
-    public static final int WIDTH = 800, HEIGHT = 600;
+public class Vista extends JFrame implements Runnable {
+
+    public static final int WIDTH = 1000, HEIGHT = 800;
     private Canvas canvas;
     private Controlador c;
     private BufferStrategy bs;
     private Graphics g;
     private Thread thread;
     private boolean running = false;
-    
+    private int FPS = 60;
+
     public Vista(Controlador c) {
         this.c = c;
         initComponents();
         setVisible(true);
         start();
-        
     }
 
-    public void initComponents(){
+    public void initComponents() {
         setTitle("Contra");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,23 +35,35 @@ public class Vista extends JFrame implements Runnable{
         setLocationRelativeTo(null);
 
         canvas = new Canvas();
-    
+
         canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT));
         canvas.setMinimumSize(new Dimension(WIDTH, HEIGHT));
         canvas.setFocusable(true);
-    
-        add(canvas); 
+
+        add(canvas);
         canvas.addKeyListener(c.keyboard);
     }
 
-
     @Override
     public void run() {
-        
+
+        double drawInterval = 1000000000 / FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+
         while (running) {
-            update();
-            draw();
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
+            lastTime = currentTime;
+
+            if (delta > 1) {
+                update();
+                draw();
+                delta--;
+            }
+
         }
 
         stop();
@@ -63,7 +75,7 @@ public class Vista extends JFrame implements Runnable{
     }
 
     private void draw() {
-        
+
         bs = canvas.getBufferStrategy();
 
         if (bs == null) {
@@ -74,11 +86,11 @@ public class Vista extends JFrame implements Runnable{
         g = bs.getDrawGraphics();
 
         // -----------------------
-        
+
         g.setColor(Color.BLACK);
 
         g.fillRect(0, 0, WIDTH, HEIGHT);
-    
+
         c.gameState.draw(g);
 
         // ---------------------
