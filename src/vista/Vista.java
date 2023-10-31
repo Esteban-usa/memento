@@ -42,6 +42,7 @@ public class Vista extends JFrame implements Runnable{
         canvas.setFocusable(true);
     
         add(canvas); 
+        canvas.addKeyListener(c.keyboard);
     }
 
 
@@ -57,7 +58,8 @@ public class Vista extends JFrame implements Runnable{
     }
 
     private void update() {
-
+        c.gameState.update();
+        c.keyboard.update();
     }
 
     private void draw() {
@@ -77,6 +79,8 @@ public class Vista extends JFrame implements Runnable{
 
         g.fillRect(0, 0, WIDTH, HEIGHT);
     
+        c.gameState.draw(g);
+
         // ---------------------
         g.dispose();
         bs.show();
