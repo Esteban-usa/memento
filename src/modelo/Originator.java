@@ -11,14 +11,14 @@ public class Originator {
     }
 
     public Memento storeMemento(){
-        System.out.println("desde originator se guardo memento");
+        System.out.println("desde originator se guardo elemento");
         return new Memento(this.player);
     }
 
     public Player restoreMemento(Memento memento){
         player = memento.getSavedPlayer();
 
-        System.out.println("desde originator se guardo en memento");
+        System.out.println("desde originator se restauro elemento");
         return player;
     }
 }

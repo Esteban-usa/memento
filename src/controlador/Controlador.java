@@ -12,8 +12,8 @@ public class Controlador {
     public KeyBoard keyboard;
     public GameState gameState;
 
-    public Controlador(Modelo m){
-        this.m = m;
+    public Controlador(){
+        //this.m = m;
         
         init();
     }

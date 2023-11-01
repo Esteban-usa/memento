@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import controlador.KeyBoard;
 
-public class Player {
+public class Player implements Cloneable {
 
     private BufferedImage texture;
     private int x, y;
@@ -27,6 +27,17 @@ public class Player {
         g.drawImage(texture, this.x, this.y, 100, 100, null);
     }
 
+    @Override
+    public Player clone() {
+        try {
+            return (Player) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+
     public void update() {
         if (KeyBoard.RIGHT) {
             this.x += this.vel;
@@ -40,29 +51,39 @@ public class Player {
         if (KeyBoard.DOWN) {
             this.y += this.vel;
         }
-        if (KeyBoard.SAVE) { // tecla s
-            originator.set(this);
+        
+
+        if (KeyBoard.UNDU) { // tecla f
+            Memento memento = caretaker.getMemento();
+            if (memento != null) {
+                currentPlayers--;
+                this.x = originator.restoreMemento(memento).x;
+                this.y = originator.restoreMemento(memento).y;
+            } else {
+                System.out.println("No hay que deshacer");
+            }
+        }
+
+        if (KeyBoard.REDU) { // tecla h
+            Memento memento = caretaker.getMemento2();
+            if (memento != null) {
+                currentPlayers++;
+                this.x = originator.restoreMemento(memento).x;
+                this.y = originator.restoreMemento(memento).y;
+            } else {
+                System.out.println("No hay que rehacer");
+            }
+        }
+    }
+
+    public void Memento(){
+       
+            Player clonedPlayer = this.clone();
+            originator.set(clonedPlayer);
             caretaker.addMemento(originator.storeMemento());
             saveFiles++;
             currentPlayers++;
-        }
-        if (KeyBoard.UNDU) { // tecla f
-            currentPlayers--;
-            int newx = originator.restoreMemento(caretaker.getMemento(currentPlayers)).x;
-            int newy = originator.restoreMemento(caretaker.getMemento(currentPlayers)).y;
-            System.out.println(newx);
-            System.out.println(newy);
-            this.x = newx;
-            this.y = newy;
-        }
-        if (KeyBoard.REDU) { // tecla h
-            if ((saveFiles - 1) > currentPlayers) {
-                this.x = 565;
-                this.y = 235;
-                currentPlayers++;
-                // Player = originator.restoreMemento(caretaker.getMemento(currentPlayers));
-            }
-        }
+        
     }
 
     public BufferedImage getTexture() {

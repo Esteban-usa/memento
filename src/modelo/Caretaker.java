@@ -1,16 +1,29 @@
 package modelo;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class Caretaker {
-    
-    ArrayList<Memento> savedPlayers = new ArrayList<Memento>();
 
-    public void addMemento(Memento m){
-        savedPlayers.add(m);
+    private Stack<Memento> savedPlayers = new Stack<>();
+    private Stack<Memento> savedPlayers2 = new Stack<>();
+
+    public void addMemento(Memento m) {
+        savedPlayers.push(m); // Push (agregar) el memento a la pila
     }
 
-    public Memento getMemento(int index){
-        return savedPlayers.get(index);
+    public Memento getMemento() {
+        if (!savedPlayers.isEmpty()) {
+            return savedPlayers2.push(savedPlayers.pop());
+        } else {
+            return null;
+        }
+    }
+
+    public Memento getMemento2() {
+        if (!savedPlayers2.isEmpty()) {
+            return savedPlayers2.pop();
+        } else {
+            return null;
+        }
     }
 }
