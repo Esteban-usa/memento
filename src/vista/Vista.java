@@ -10,7 +10,7 @@ import java.awt.image.BufferStrategy;
 import controlador.Controlador;
 import modelo.Checkpoint;
 
-public class Vista extends JFrame implements Runnable  {
+public class Vista extends JFrame implements Runnable {
 
     public static final int WIDTH = 1000, HEIGHT = 800;
     private Canvas canvas;
@@ -45,7 +45,8 @@ public class Vista extends JFrame implements Runnable  {
         add(canvas);
         canvas.addKeyListener(c.keyboard);
     }
-    public void rr(){
+
+    public void rr() {
         this.repaint();
     }
 
@@ -72,16 +73,6 @@ public class Vista extends JFrame implements Runnable  {
 
         stop();
     }
-
-    private void checkCollisions() {
-    
-         /*if (c.gameState.getPlayer().getBounds().intersects(checkpoint.getBounds()) && !c.gameState.getCheckpoint().isUsado()) {
-            checkpoint.setUsado(true);
-            player.Memento(); */
-        
-        
-    }
-
 
     private void update() {
         c.gameState.update();

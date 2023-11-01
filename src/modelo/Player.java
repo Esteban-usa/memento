@@ -1,6 +1,7 @@
 package modelo;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import controlador.KeyBoard;
@@ -8,23 +9,30 @@ import controlador.KeyBoard;
 public class Player implements Cloneable {
 
     private BufferedImage texture;
-    private int x, y;
+    private int x, y,width,height;
     private double vel;
+    //private Rectangle rectangle;
 
     Caretaker caretaker = new Caretaker();
     Originator originator = new Originator();
 
     int saveFiles = 0, currentPlayers = 0;
 
-    public Player(BufferedImage texture, int x, int y, double vel) {
+    public Player(BufferedImage texture, int x, int y,int width,int height, double vel) {
         this.texture = texture;
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
         this.vel = vel;
     }
 
     public void draw(Graphics g) {
-        g.drawImage(texture, this.x, this.y, 100, 100, null);
+        g.drawImage(texture, this.x, this.y, this.width, this.height, null);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
     }
 
     @Override
