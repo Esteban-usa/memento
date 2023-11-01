@@ -44,6 +44,9 @@ public class Vista extends JFrame implements Runnable {
         add(canvas);
         canvas.addKeyListener(c.keyboard);
     }
+    public void rr(){
+        this.repaint();
+    }
 
     @Override
     public void run() {

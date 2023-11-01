@@ -12,7 +12,7 @@ public class Originator {
 
     public Memento storeMemento(){
         System.out.println("desde originator se guardo memento");
-        return new Memento(player);
+        return new Memento(this.player);
     }
 
     public Player restoreMemento(Memento memento){

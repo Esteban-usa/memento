@@ -15,6 +15,8 @@ public class KeyBoard implements KeyListener {
         LEFT = false;
         RIGHT = false;
         SAVE = false;
+        UNDU = false;
+        REDU = false;
     }
 
     public void update(){
@@ -25,6 +27,7 @@ public class KeyBoard implements KeyListener {
         SAVE = keys[83]; // TECLA S
         UNDU = keys[70]; // TECLA F
         REDU = keys[72]; // TECLA H
+
 
     }
 

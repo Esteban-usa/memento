@@ -48,10 +48,17 @@ public class Player {
         }
         if (KeyBoard.UNDU) { // tecla f
             currentPlayers--;
-            // Player = originator.restoreMemento(caretaker.getMemento(currentPlayers));
+            int newx = originator.restoreMemento(caretaker.getMemento(currentPlayers)).x;
+            int newy = originator.restoreMemento(caretaker.getMemento(currentPlayers)).y;
+            System.out.println(newx);
+            System.out.println(newy);
+            this.x = newx;
+            this.y = newy;
         }
         if (KeyBoard.REDU) { // tecla h
             if ((saveFiles - 1) > currentPlayers) {
+                this.x = 565;
+                this.y = 235;
                 currentPlayers++;
                 // Player = originator.restoreMemento(caretaker.getMemento(currentPlayers));
             }
