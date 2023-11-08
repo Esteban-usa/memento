@@ -1,6 +1,10 @@
 package vista;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,7 +12,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import controlador.Controlador;
-import modelo.Checkpoint;
 
 public class Vista extends JFrame implements Runnable {
 
@@ -20,6 +23,8 @@ public class Vista extends JFrame implements Runnable {
     private Thread thread;
     private boolean running = false;
     private int FPS = 60;
+    private JPanel bottomPanel;
+    private JButton yourButton, yourButton2;
 
     public Vista(Controlador c) {
         this.c = c;
@@ -36,13 +41,35 @@ public class Vista extends JFrame implements Runnable {
         setLocationRelativeTo(null);
 
         canvas = new Canvas();
-
         canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT));
         canvas.setMinimumSize(new Dimension(WIDTH, HEIGHT));
         canvas.setFocusable(true);
 
         add(canvas);
+
+        // Crear el JPanel para el botón
+        bottomPanel = new JPanel();
+        bottomPanel.setPreferredSize(new Dimension(WIDTH, 50));
+        bottomPanel.setBackground(Color.GRAY);
+
+        // Crear el botón y agregarlo al JPanel
+        yourButton = new JButton("CTRL Z");
+        yourButton.addActionListener(e -> {
+            c.gameState.getPlayer().DesMemento();
+        });
+
+        yourButton2 = new JButton("CTRL Y");
+        yourButton2.addActionListener(e -> {
+            c.gameState.getPlayer().ResMemento();
+        });
+
+        bottomPanel.add(yourButton);
+        bottomPanel.add(yourButton2);
+
+        // Agregar el JPanel al JFrame en la posición sur (parte inferior)
+        add(bottomPanel, BorderLayout.SOUTH);
+
         canvas.addKeyListener(c.keyboard);
     }
 

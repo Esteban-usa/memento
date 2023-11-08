@@ -9,16 +9,16 @@ import controlador.KeyBoard;
 public class Player implements Cloneable {
 
     private BufferedImage texture;
-    private int x, y,width,height;
+    private int x, y, width, height;
     private double vel;
-    //private Rectangle rectangle;
+    // private Rectangle rectangle;
 
     Caretaker caretaker = new Caretaker();
     Originator originator = new Originator();
 
     int saveFiles = 0, currentPlayers = 0;
 
-    public Player(BufferedImage texture, int x, int y,int width,int height, double vel) {
+    public Player(BufferedImage texture, int x, int y, int width, int height, double vel) {
         this.texture = texture;
         this.x = x;
         this.y = y;
@@ -44,7 +44,6 @@ public class Player implements Cloneable {
             return null;
         }
     }
-    
 
     public void update() {
         if (KeyBoard.RIGHT) {
@@ -59,39 +58,42 @@ public class Player implements Cloneable {
         if (KeyBoard.DOWN) {
             this.y += this.vel;
         }
-        
-
-        if (KeyBoard.UNDU) { // tecla f
-            Memento memento = caretaker.getMemento();
-            if (memento != null) {
-                currentPlayers--;
-                this.x = originator.restoreMemento(memento).x;
-                this.y = originator.restoreMemento(memento).y;
-            } else {
-                System.out.println("No hay que deshacer");
-            }
-        }
-
-        if (KeyBoard.REDU) { // tecla h
-            Memento memento = caretaker.getMemento2();
-            if (memento != null) {
-                currentPlayers++;
-                this.x = originator.restoreMemento(memento).x;
-                this.y = originator.restoreMemento(memento).y;
-            } else {
-                System.out.println("No hay que rehacer");
-            }
-        }
     }
 
-    public void Memento(){
-       
-            Player clonedPlayer = this.clone();
-            originator.set(clonedPlayer);
-            caretaker.addMemento(originator.storeMemento());
-            saveFiles++;
+    public void Memento() {
+
+        Player clonedPlayer = this.clone();
+        originator.set(clonedPlayer);
+        caretaker.addMemento(originator.storeMemento());
+        saveFiles++;
+        currentPlayers++;
+
+    }
+
+    public void DesMemento() {
+
+        Memento memento = caretaker.getMemento();
+        if (memento != null) {
+            currentPlayers--;
+            this.x = originator.restoreMemento(memento).x;
+            this.y = originator.restoreMemento(memento).y;
+        } else {
+            System.out.println("No hay que deshacer");
+        }
+
+    }
+
+    public void ResMemento() {
+
+        Memento memento = caretaker.getMemento2();
+        if (memento != null) {
             currentPlayers++;
-        
+            this.x = originator.restoreMemento(memento).x;
+            this.y = originator.restoreMemento(memento).y;
+        } else {
+            System.out.println("No hay que rehacer");
+        }
+
     }
 
     public BufferedImage getTexture() {

@@ -8,7 +8,8 @@ public class GameState {
 
     private Player player;
     private List<Checkpoint> checkpoints;
-    private Checkpoint checkpoint, checkpoint2, checkpoint3, checkpoint4;
+    private Checkpoint checkpoint;
+    
 
     public GameState() {
         player = new Player(Buffered.imageLoader("D:\\Universidad\\semestre 6\\Patrones\\memento\\src\\img\\cubo.png"),
