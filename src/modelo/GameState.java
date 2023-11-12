@@ -12,25 +12,25 @@ public class GameState {
     
 
     public GameState() {
-        player = new Player(Buffered.imageLoader("D:\\Universidad\\semestre 6\\Patrones\\memento\\src\\img\\cubo.png"),
-                20, 450, 50, 50, 5);
+        player = new Player(Buffered.imageLoader("src\\img\\cubo.png"),
+                20, 450, 50, 50, 10);
 
         checkpoints = new ArrayList<>();
 
         checkpoints.add(new Checkpoint(
-                Buffered.imageLoader("D:\\Universidad\\semestre 6\\Patrones\\memento\\src\\img\\check.png"), 200, 20,
+                Buffered.imageLoader("src\\img\\checkpoint.png"), 200, 20,
                 50, 50, false));
 
         checkpoints.add(new Checkpoint(
-                Buffered.imageLoader("D:\\Universidad\\semestre 6\\Patrones\\memento\\src\\img\\check.png"), 400, 20,
+                Buffered.imageLoader("src\\img\\checkpoint.png"), 400, 20,
                 50, 50, false));
 
         checkpoints.add(new Checkpoint(
-                Buffered.imageLoader("D:\\Universidad\\semestre 6\\Patrones\\memento\\src\\img\\check.png"), 20, 200,
+                Buffered.imageLoader("src\\img\\checkpoint.png"), 20, 200,
                 50, 50, false));
 
         checkpoints.add(new Checkpoint(
-                Buffered.imageLoader("D:\\Universidad\\semestre 6\\Patrones\\memento\\src\\img\\check.png"), 20, 400,
+                Buffered.imageLoader("src\\img\\checkpoint.png"), 20, 400,
                 50, 50, false));
     }
 
